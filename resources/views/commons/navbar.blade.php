@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <title>タスク管理ボード</title>
-        
-    </head>
-
 
 <header>
     <nav class="navbar navbar-inverse navbar-static-top">
@@ -21,7 +13,8 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>{!! link_to_route('tasks.create', '新規タスクの投稿') !!}</li>
+                    <li><a href="#">Signup</a></li>
+                    <li><a href="#">Login</a></li>
                 </ul>
             </div>
         </div>
