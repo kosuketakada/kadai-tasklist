@@ -15,11 +15,15 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password', 60);
-            $table->rememberToken();
+            $table->integer('user_id')->unsigned()->index();
+            $table->string('status');
+            $table->string('content');
+            
+            
             $table->timestamps();
+            
+            $table->foreign('user_id')->references('id')->on('users');
+            
         });
     }
 

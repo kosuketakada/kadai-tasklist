@@ -6,11 +6,11 @@
     
 
 
-   {!! Form::model($task, ['route' => 'tasks.store']) !!}
+   {!! Form::model($tasks, ['route' => 'tasks.store']) !!}
 
               
        
-            {!! Form::model($task, ['route' => 'tasks.store']) !!}
+            {!! Form::model($tasks, ['route' => 'tasks.store']) !!}
 
                 <div class="form-group">
                     {!! Form::label('status', 'ステータス:') !!}
