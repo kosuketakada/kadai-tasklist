@@ -17,11 +17,17 @@ class TasksController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
-
-        return view('tasks.index', [
+        $data = [];
+        $user = \Auth::user();
+        $tasks = $user->tasks()->orderBy('created_at' , 'desc')->paginate(10);
+        
+        $data = [
+            'user' => $user,
             'tasks' => $tasks,
-            ]);
+            ];
+        
+        return view('tasks.index', $data);
+    
     }
 
     /**
@@ -45,24 +51,19 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        $this->validate($request, [
-        
-            
-            'status'=>'required|max:10',
+    {
+      $this->validate($request, [
             'content' => 'required|max:191',
+            'status' => 'required|max:191',
         ]);
-       
-        $tasks = new Task;
-        
-        
-        $tasks->status = $request->status;
-        $tasks->content = $request->content;
-        $tasks->save();
+
+        $request->user()->tasks()->create([
+            'content' => $request->content,
+            'status' => $request->status,
+        ]);
 
         return redirect('/');
     }
-
     /**
      * Display the specified resource.
      *
@@ -72,10 +73,14 @@ class TasksController extends Controller
     public function show($id)
     {
         $tasks = Task::find($id);
-        
+        if($tasks ===null){
+            return view('welcome');
+        }
+        if(\Auth::user()->id===$tasks->user_id){
         return view('tasks.show', [
             'tasks' =>$tasks,
         ]);
+        }
     }
 
     /**
@@ -87,10 +92,14 @@ class TasksController extends Controller
     public function edit($id)
     {
          $tasks = Task::find($id);
-
+         if($tasks===null){
+                return view ('welcome');
+         }        
+        if(\Auth::user()->id===$tasks->user_id){
         return view('tasks.edit', [
             'tasks' => $tasks,
         ]);
+        }
     }
 
     /**
