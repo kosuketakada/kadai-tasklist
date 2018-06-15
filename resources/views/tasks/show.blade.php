@@ -4,7 +4,6 @@
 
     <h1>id = {{ $tasks->id }} のタスク詳細ページ</h1>
 
-   
      <table class="table table-bordered">
         <tr>
             <th>id</th>

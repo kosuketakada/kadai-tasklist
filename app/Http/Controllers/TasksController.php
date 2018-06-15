@@ -81,6 +81,10 @@ class TasksController extends Controller
             'tasks' =>$tasks,
         ]);
         }
+        else{
+            return redirect('/');
+        }
+        
     }
 
     /**
@@ -99,6 +103,9 @@ class TasksController extends Controller
         return view('tasks.edit', [
             'tasks' => $tasks,
         ]);
+        }
+        else{
+            return redirect('/');
         }
     }
 
@@ -123,7 +130,7 @@ class TasksController extends Controller
         $tasks->content = $request->content;
         $tasks->save();
 
-        return redirect('/');
+        return redirect('/tasks');
     }
 
     /**
@@ -137,6 +144,6 @@ class TasksController extends Controller
          $tasks = Task::find($id);
         $tasks->delete();
 
-        return redirect('/');
+        return redirect('/tasks');
     }
 }
